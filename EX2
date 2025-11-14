@@ -1,0 +1,94 @@
+//EX2
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Custom buttons"),
+          backgroundColor: const Color.fromARGB(255, 213, 219, 222),
+        ),
+        backgroundColor: const Color.fromARGB(255, 213, 219, 222),
+        body: Center(
+          child: Column(
+            children: [
+              Custombutton(
+                label: "Submit",
+                icon: Icons.check,
+                buttonType: ButtonType.primary,
+              ),
+
+              Custombutton(
+                label: "Time",
+                icon: Icons.timelapse,
+                buttonType: ButtonType.secondary,
+                iconPosition: IconPosition.right,
+              ),
+              Custombutton(
+                label: "Account",
+                icon: Icons.account_balance,
+                buttonType: ButtonType.disabled,
+                iconPosition: IconPosition.right,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+enum ButtonType { primary, secondary, disabled }
+
+enum IconPosition { left, right }
+
+Color getButtonColor(ButtonType buttonType) {
+  switch (buttonType) {
+    case ButtonType.primary:
+      return Colors.blue;
+    case ButtonType.secondary:
+      return Colors.green;
+    case ButtonType.disabled:
+      return Colors.grey;
+  }
+}
+
+class Custombutton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final IconPosition iconPosition;
+  final ButtonType buttonType;
+  const Custombutton({
+    super.key,
+    required this.label,
+    required this.icon,
+    this.iconPosition = IconPosition.left,
+    this.buttonType = ButtonType.primary,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.all(20),
+
+      decoration: BoxDecoration(
+        color: getButtonColor(buttonType),
+        borderRadius: BorderRadius.circular(40),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: iconPosition == IconPosition.left
+            ? [
+                Icon(icon),
+                SizedBox(width: 8),
+                Text(label, style: TextStyle(fontSize: 20)),
+              ]
+            : [
+                Text(label, style: TextStyle(fontSize: 20)),
+                SizedBox(width: 8),
+                Icon(icon),
+              ],
+      ),
+    );
+  }
+}
