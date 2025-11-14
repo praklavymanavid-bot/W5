@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.grey,
+        appBar: AppBar(
+          title: Text("MY HOBBIES"),
+          backgroundColor: Colors.white70,
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              HobbyCard(
+                color: Colors.green,
+                text: "Travelling",
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.pink,
+                  size: 36.0,
+                  semanticLabel: 'Text to announce in accessibility modes',
+                ),
+              ),
+              HobbyCard(
+                color: Colors.lightBlueAccent,
+                text: "Skating",
+                icon: Icon(Icons.beach_access, color: Colors.blue, size: 36.0),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+class HobbyCard extends StatelessWidget {
+  final String text;
+  final Icon icon;
+  final Color color;
+
+  const HobbyCard({
+    super.key,
+    required this.text,
+    required this.icon,
+    this.color = Colors.blue,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(20),
+      ),
+
+      child: Row(
+        children: [
+          Container(padding: EdgeInsets.all(15)),
+          icon,
+          Container(padding: EdgeInsets.all(10)),
+          Text(text, style: TextStyle(fontSize: 20, color: Colors.white)),
+        ],
+      ),
+    );
+  }
+}
