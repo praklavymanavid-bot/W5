@@ -1,0 +1,133 @@
+//EX4
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MaterialApp(home: Scaffold()));
+}
+
+class WeatherApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blue[100],
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlueAccent,
+        leading: Icon(Icons.menu, color: Colors.white),
+      ),
+      body: ListView(
+        children: [
+          WeatherCard(
+            city: "Phnom Penh",
+            temp: "12.2°C",
+            min: "Min 10.0°C",
+            max: "Max 30.0°C",
+            image: "assets/ex4/cloudy.png",
+            gradient: LinearGradient(
+              colors: [Colors.blueAccent, Colors.lightBlueAccent],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          WeatherCard(
+            city: "Paris",
+            temp: "22.2°C",
+            min: "Min 10.0°C",
+            max: "Max 40.0°C",
+            image: "assets/ex4/sunny.png",
+            gradient: LinearGradient(
+              colors: [Colors.greenAccent, Colors.lightGreen],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          WeatherCard(
+            city: "Rome",
+            temp: "30.0°C",
+            min: "Min 15.0°C",
+            max: "Max 45.0°C",
+            image: "assets/ex4/sunnyCloudy.png",
+            gradient: LinearGradient(
+              colors: [Colors.redAccent.shade100, Colors.red.shade200],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          WeatherCard(
+            city: "Toulouse",
+            temp: "45.2°C",
+            min: "Min 10.0°C",
+            max: "Max 40.0°C",
+            image: "assets/ex4/veryCloudy.png",
+            gradient: LinearGradient(
+              colors: [Colors.yellow.shade200, Colors.amberAccent],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class WeatherCard extends StatelessWidget {
+  final String city;
+  final String temp;
+  final String min;
+  final String max;
+  final String image;
+  final Gradient gradient;
+
+  const WeatherCard({
+    super.key,
+    required this.city,
+    required this.temp,
+    required this.min,
+    required this.max,
+    required this.image,
+    required this.gradient,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(12),
+      child: PhysicalModel(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(20),
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          decoration: BoxDecoration(gradient: gradient),
+          padding: EdgeInsets.all(20),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.white,
+                child: Image.asset(image, width: 30, height: 30),
+              ),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    city,
+                    style: TextStyle(fontSize: 22, color: Colors.white),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    temp,
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  Text(
+                    "$min   $max",
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
